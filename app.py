@@ -39,13 +39,40 @@ class AnalyzeText(Resource):
             try:
                 common_words[word]
             except KeyError:
-                words_not_found.append(word)
+                result = {
+                    'word': word,
+                    'suggestions': [],
+                    'problem': 'NotFoundInCommonList',
+                    'definition': 'definition string',
+                    'definition_url': "http://de.pons.com/%C3%BCbersetzung?l=dedx&q=kind&in=de&language=de",
+                }
+                words_not_found.append(result)
+
+
         return words_not_found
 
 api.add_resource(AnalyzeText, '/analyze/<string:text>')
 
 
-
+"""
+[
+  {
+    "word": "misspelledWord",
+    "suggestions": [],
+    "problem": "misspelled",
+    "definition": "definition string",
+    "definition_url": "http://de.pons.com/%C3%BCbersetzung?l=dedx&q=kind&in=de&language=de"
+  },
+  {
+    "word": "notInList",
+    "suggestions": [
+      "suggestion1, suggestion2"
+    ],
+    "problem": "not in list",
+    "definition": "definition string",
+    "definition_url": "http://de.pons.com/%C3%BCbersetzung?l=dedx&q=kind&in=de&language=de"
+  }
+]"""
 
 if __name__ == '__main__':
     app.run(debug=True)
