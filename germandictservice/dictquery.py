@@ -1,22 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
-from . import cfg
 
-secret = cfg.secret
 
-def query_pons_dictionary(query, secret=secret):
-    """Makes a requst to Pons using their online API. Returns a response dictionary."""
+def query_pons_dictionary(query, secret):
+    """Makes a requst to Pons using their online API. Returns a response dictionary.
+    Builds it following Pons' reccomendations: http://en.pons.com/assets/docs/api_dict.pdf"""
     url = "https://api.pons.com/v1/dictionary"
-    header = {
-        'X-Secret': '230a9175235c293af92041202396161ba2cec6bd055a98f10c3af4ce95f7fb2d',
-    }
-
-    msg = {
-        'l': 'dedx',
-        'q': query,
-        'in': 'de',
-        'language': 'de',
-    }
+    header = {'X-Secret': secret}
+    msg = {'l': 'dedx', 'q': query, 'in': 'de','language': 'de'}
     r = requests.get(url, headers=header, params=msg)  # , verify=False)
     return r.json()
 
