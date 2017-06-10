@@ -54,25 +54,6 @@ class AnalyzeText(Resource):
 api.add_resource(AnalyzeText, '/analyze/<string:text>')
 
 
-"""
-[
-  {
-    "word": "misspelledWord",
-    "suggestions": [],
-    "problem": "misspelled",
-    "definition": "definition string",
-    "definition_url": "http://de.pons.com/%C3%BCbersetzung?l=dedx&q=kind&in=de&language=de"
-  },
-  {
-    "word": "notInList",
-    "suggestions": [
-      "suggestion1, suggestion2"
-    ],
-    "problem": "not in list",
-    "definition": "definition string",
-    "definition_url": "http://de.pons.com/%C3%BCbersetzung?l=dedx&q=kind&in=de&language=de"
-  }
-]"""
 
 if __name__ == '__main__':
     app.run(debug=True)
