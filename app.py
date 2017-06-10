@@ -17,7 +17,8 @@ class Definitions(Resource):
     def get(self, query):
         response = query_pons_dictionary(query=query, secret=secret)
         result = {}
-        result['definitions'] = list(extract_definitions(response))
+        result['definitions'] = list(extract_definitions(response.json()))
+        result['definitions_url'] = 'http://de.pons.com/%C3%BCbersetzung?' + response.url.split('?')[1]
         return result
 
 api.add_resource(Definitions, '/defs/<string:query>')

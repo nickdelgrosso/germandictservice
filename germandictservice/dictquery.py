@@ -3,13 +3,13 @@ from bs4 import BeautifulSoup
 
 
 def query_pons_dictionary(query, secret):
-    """Makes a requst to Pons using their online API. Returns a response dictionary.
+    """Makes a requst to Pons using their online API. Returns a response.
     Builds it following Pons' reccomendations: http://en.pons.com/assets/docs/api_dict.pdf"""
     url = "https://api.pons.com/v1/dictionary"
     header = {'X-Secret': secret}
     msg = {'l': 'dedx', 'q': query, 'in': 'de','language': 'de'}
-    r = requests.get(url, headers=header, params=msg)  # , verify=False)
-    return r.json()
+    response = requests.get(url, headers=header, params=msg)  # , verify=False)
+    return response
 
 
 def extract_definitions(pons_response_dict):
